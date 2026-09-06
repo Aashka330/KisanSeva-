@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-green: #1B4332;
+  --color-deep-green-light: #2D6A4F;
+  --color-leaf: #40916C;
+  --color-leaf-light: #52B788;
+  --color-leaf-pale: #95D5B2;
+  --color-warm-yellow: #E9C46A;
+  --color-warm-yellow-dark: #D4A843;
+  --color-earth: #6B4423;
+  --color-earth-light: #8B6914;
+  --color-cream: #FAFAF8;
+  --color-beige: #F0F4F0;
+  --color-beige-dark: #E2EBE2;
+  --color-surface: #FFFFFF;
+  --color-muted: #64748B;
+  --color-border: #E2E8E4;
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --shadow-soft: 0 4px 24px rgba(27, 67, 50, 0.08);
+  --shadow-card: 0 8px 32px rgba(27, 67, 50, 0.12);
+  --shadow-hover: 0 20px 60px rgba(27, 67, 50, 0.18);
+  --shadow-glow: 0 0 80px rgba(82, 183, 136, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: #1e293b;
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #52B788 0%, #E9C46A 50%, #95D5B2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-white {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(27, 67, 50, 0.92) 0%,
+      rgba(45, 106, 79, 0.75) 40%,
+      rgba(27, 67, 50, 0.85) 100%
+    );
+  }
+
+  .mesh-bg {
+    background-color: #F0F4F0;
+    background-image:
+      radial-gradient(at 20% 30%, rgba(82, 183, 136, 0.15) 0, transparent 50%),
+      radial-gradient(at 80% 20%, rgba(233, 196, 106, 0.12) 0, transparent 45%),
+      radial-gradient(at 60% 80%, rgba(27, 67, 50, 0.08) 0, transparent 50%);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
