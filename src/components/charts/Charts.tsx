@@ -127,10 +127,10 @@ export function GaugeChart({ value, max = 100, label }: { value: number; max?: n
 export function RegionalBarChart({ data, height = 280 }: { data: { region: string; price: number }[]; height?: number }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} layout="vertical">
+      <BarChart data={data} layout="vertical" margin={{ left: 20, right: 20 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#E2E8E4" horizontal={false} />
         <XAxis type="number" tick={{ fontSize: 12, fill: '#64748B' }} />
-        <YAxis dataKey="region" type="category" tick={{ fontSize: 11, fill: '#64748B' }} width={100} />
+        <YAxis dataKey="region" type="category" tick={{ fontSize: 11, fill: '#64748B' }} width={140} />
         <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #E2E8E4' }} />
         <Bar dataKey="price" fill="#40916C" radius={[0, 4, 4, 0]} />
       </BarChart>

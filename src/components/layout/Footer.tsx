@@ -65,7 +65,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/50">© 2026 KisanSeva. All rights reserved.</p>
-          <p className="text-xs text-white/40">All data displayed is synthetic/demo data for prototype purposes.</p>
+          <p className="text-xs text-white/40">Some pages use demo data. Crop suitability uses Open-Meteo location weather and climate with provisional crop reference ranges.</p>
         </div>
       </div>
     </footer>

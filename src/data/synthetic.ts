@@ -242,7 +242,7 @@ export const chatResponses: Record<string, string> = {
 
 export const faqItems = [
   { q: 'Is KisanSeva free to use?', a: 'Yes, basic features are free. Premium analytics and advanced AI recommendations are available with a subscription plan.' },
-  { q: 'How accurate are the recommendations?', a: 'All data in this prototype is synthetic/demo data. In production, recommendations would use real-time weather, soil, and market data.' },
+  { q: 'How accurate are the recommendations?', a: 'Crop suitability uses location-specific weather and gridded climate data, but its crop reference ranges are general prototype heuristics—not validated farm advice. Soil and water inputs are user-selected, and market data elsewhere in the prototype is synthetic/demo data.' },
   { q: 'Can I use KisanSeva on my phone?', a: 'Yes, KisanSeva is fully responsive and works on mobile, tablet, and desktop devices.' },
   { q: 'What languages are supported?', a: 'Currently English, Hindi (हिंदी), and Marathi (मराठी) are supported.' },
   { q: 'Are pesticide recommendations safe to follow?', a: 'No. All pesticide and fertilizer recommendations in this demo are simulated. Always consult certified agricultural experts before applying any treatment.' },

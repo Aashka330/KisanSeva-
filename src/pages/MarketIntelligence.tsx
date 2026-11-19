@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { TrendingUp, BarChart3, Filter } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart3, Filter, ShieldCheck, Zap } from 'lucide-react';
 import Layout from '../components/layout/Layout';
 import Breadcrumbs from '../components/layout/Breadcrumbs';
 import Card from '../components/ui/Card';
-import DemoBadge from '../components/ui/DemoBadge';
 import Button from '../components/ui/Button';
+import DemoBadge from '../components/ui/DemoBadge';
 import { PriceLineChart, SupplyDemandChart, RegionalBarChart } from '../components/charts/Charts';
-import { marketData } from '../data/synthetic';
+import { getMarketCommodityData, SYNTHETIC_MODEL_INFO } from '../lib/agriEngine';
 
 const tabs = ['Crop Market', 'Plant Market', 'Tree/Wood Market', 'Import & Export'];
 const commodities = ['Soybean', 'Wheat', 'Cotton', 'Rice', 'Sugarcane'];
-const regions = ['All Regions', 'Maharashtra', 'Punjab', 'Karnataka', 'Gujarat'];
+const regions = ['All Regions', 'Maharashtra', 'Punjab', 'Karnataka', 'Gujarat', 'Madhya Pradesh'];
 const periods = ['7 Days', '30 Days', '90 Days', '1 Year'];
 
 export default function MarketIntelligence() {
@@ -20,6 +20,16 @@ export default function MarketIntelligence() {
   const [period, setPeriod] = useState('30 Days');
 
   const selectClass = 'px-3 py-2 rounded-xl border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-leaf-light/50';
+
+  const marketData = getMarketCommodityData(commodity);
+  const TrendIcon = marketData.sentiment === 'Bearish' ? TrendingDown : TrendingUp;
+
+  // Filter regional prices if a specific region is chosen
+  const filteredRegionalPrices = region === 'All Regions'
+    ? marketData.regionalPrices
+    : marketData.regionalPrices.filter(r => r.region.toLowerCase().includes(region.toLowerCase()));
+
+  const displayRegionalPrices = filteredRegionalPrices.length > 0 ? filteredRegionalPrices : marketData.regionalPrices;
 
   return (
     <Layout>
@@ -32,7 +42,7 @@ export default function MarketIntelligence() {
               <h1 className="text-3xl sm:text-4xl font-bold text-deep-green font-heading">Market Intelligence</h1>
               <p className="mt-2 text-muted">Track prices, analyze trends, and make informed market decisions.</p>
             </div>
-            <DemoBadge />
+            <DemoBadge label="Synthetic estimates — not live mandi prices" />
           </div>
 
           <div className="flex flex-wrap gap-2 mb-6">
@@ -82,9 +92,9 @@ export default function MarketIntelligence() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {[
                   { label: 'Current Price', value: `₹${marketData.currentPrice.toLocaleString()}`, sub: `/ ${marketData.unit}`, icon: BarChart3 },
-                  { label: '7-Day Change', value: `+${marketData.change7d}%`, sub: 'vs last week', icon: TrendingUp, positive: true },
-                  { label: '30-Day Change', value: `+${marketData.change30d}%`, sub: 'vs last month', icon: TrendingUp, positive: true },
-                  { label: 'Market Sentiment', value: marketData.sentiment, sub: `Demand: ${marketData.demand}`, icon: TrendingUp },
+                  { label: 'Govt MSP', value: `₹${marketData.msp.toLocaleString()}`, sub: 'Benchmark floor', icon: ShieldCheck },
+                  { label: '30-Day Model Estimate', value: `₹${marketData.forecast30d.toLocaleString()}`, sub: 'Synthetic model · not a live quote', icon: Zap, positive: true },
+                  { label: 'Market Sentiment', value: marketData.sentiment, sub: `Demand: ${marketData.demand} · Supply: ${marketData.supply}`, icon: TrendIcon, positive: marketData.sentiment !== 'Bearish' },
                 ].map(kpi => (
                   <Card key={kpi.label}>
                     <div className="flex items-center justify-between mb-2">
@@ -97,20 +107,36 @@ export default function MarketIntelligence() {
                 ))}
               </div>
 
+              <p className="text-xs text-muted mb-6">
+                Forecast model trained on {SYNTHETIC_MODEL_INFO.marketTrainingExamples.toLocaleString()} generated market scenarios;
+                all displayed observations are demo values, not a live mandi feed.
+              </p>
+
               <div className="grid lg:grid-cols-2 gap-6 mb-8">
                 <Card>
-                  <h3 className="font-bold text-deep-green mb-4">Price History — {commodity}</h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-deep-green">Price History & Projection — {marketData.commodity}</h3>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${marketData.sentiment === 'Bearish' ? 'bg-red-50 text-red-600' : 'bg-leaf-light/20 text-leaf'}`}>
+                      Trend: {marketData.sentiment}
+                    </span>
+                  </div>
                   <PriceLineChart data={marketData.priceHistory} dataKey="price" />
                 </Card>
                 <Card>
-                  <h3 className="font-bold text-deep-green mb-4">Supply vs Demand</h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-deep-green">Supply vs Demand Balance</h3>
+                    <span className="text-xs text-muted">Index (0–100)</span>
+                  </div>
                   <SupplyDemandChart data={marketData.supplyDemand} />
                 </Card>
               </div>
 
               <Card>
-                <h3 className="font-bold text-deep-green mb-4">Regional Price Comparison</h3>
-                <RegionalBarChart data={marketData.regionalPrices} />
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-deep-green">Regional Mandi Prices ({commodity})</h3>
+                  <span className="text-xs text-muted">Filter: {region}</span>
+                </div>
+                <RegionalBarChart data={displayRegionalPrices} />
               </Card>
 
               <div className="grid sm:grid-cols-3 gap-4 mt-6">
@@ -125,7 +151,8 @@ export default function MarketIntelligence() {
                 <Card className="text-center">
                   <p className="text-xs text-muted">Trend</p>
                   <p className="text-xl font-bold text-deep-green flex items-center justify-center gap-1">
-                    <TrendingUp className="w-5 h-5" /> Bullish
+                    <TrendIcon className="w-5 h-5" />
+                    {marketData.sentiment}
                   </p>
                 </Card>
               </div>

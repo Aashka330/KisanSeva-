@@ -23,7 +23,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Government',
     source: 'PIB / PM India',
     sourceUrl: 'https://www.pmindia.gov.in/en/news_updates/cabinet-approves-continuation-of-the-pm-kisan-scheme-from-2026-27-to-2030-31-with-a-financial-outlay-of-rs-3-15-lakh-crore/',
-    image: 'https://images.unsplash.com/photo-1605000796989-bf6294383030?w=800&q=80&auto=format&fit=crop',
+    image: '/images/indianfarmer2.jpeg',
     imageAlt: 'Indian farmer in agricultural field',
     featured: true,
   },
@@ -37,7 +37,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Weather',
     source: 'PSU Connect',
     sourceUrl: 'https://www.psuconnect.in/memorandum-of-understanding/nabard-imd-sign-mou-to-integrate-weather-data-into-dicra-platform',
-    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&q=80&auto=format&fit=crop',
+    image: '/images/indiafarmer1.jpeg',
     imageAlt: 'Weather monitoring over agricultural landscape',
   },
   {
@@ -50,7 +50,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Market',
     source: 'Press Information Bureau',
     sourceUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2251543&lang=1&reg=3',
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ed582236?w=800&q=80&auto=format&fit=crop',
+    image: '/images/indianfarmer3.jpeg',
     imageAlt: 'Agricultural grain market and produce trading',
   },
   {
@@ -63,7 +63,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Weather',
     source: 'India Meteorological Department',
     sourceUrl: 'https://mausam.imd.gov.in/Forecast/marquee_data/Press%20Release%2002-09-2026.pdf',
-    image: 'https://images.unsplash.com/photo-1527482790871-ef109632a975?w=800&q=80&auto=format&fit=crop',
+    image: '/images/sky.jpg',
     imageAlt: 'Heavy monsoon clouds over farmland',
   },
   {
@@ -76,7 +76,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Farming',
     source: 'Press Information Bureau',
     sourceUrl: 'https://www.pib.gov.in/PressNoteDetails.aspx?lang=2&ModuleId=3&NoteId=155019&reg=3',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80&auto=format&fit=crop',
+    image: '/images/fruitmarket.jpeg',
     imageAlt: 'Green farmland at sunrise',
   },
   {
@@ -89,7 +89,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Export/Import',
     source: 'Ministry of Agriculture',
     sourceUrl: 'https://sansad.in/getFile/lsapps/loksabhaquestions/annex/188/AU2742_XQlqHn.pdf',
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80&auto=format&fit=crop',
+    image: '/images/fruitmarket2.jpeg',
     imageAlt: 'Organic vegetables and fresh produce',
   },
   {
@@ -102,7 +102,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Government',
     source: 'The Indian Express',
     sourceUrl: 'https://indianexpress.com/article/india/cabinet-approves-extension-of-pm-kisan-for-5-years-10812821/',
-    image: 'https://images.unsplash.com/photo-1560493671-8832581d0c0e?w=800&q=80&auto=format&fit=crop',
+    image: '/images/farmer.jpg',
     imageAlt: 'Farmer using mobile phone in field',
   },
   {
@@ -115,7 +115,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Market',
     source: 'Lok Sabha',
     sourceUrl: 'https://sansad.in/getFile/lsapps/loksabhaquestions/annex/188/AU247_t4SFGX.pdf',
-    image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80&auto=format&fit=crop',
+    image: '/images/farmer1.jpeg',
     imageAlt: 'Fresh vegetables at farmers market',
   },
   {
@@ -128,7 +128,7 @@ export const newsArticles: NewsArticle[] = [
     filter: 'Policy',
     source: 'Ministry of Agriculture',
     sourceUrl: 'https://sansad.in/getFile/lsapps/loksabhaquestions/annex/188/AU2638_mandJf.pdf',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80&auto=format&fit=crop',
+    image: '/images/market2.jpeg',
     imageAlt: 'Farmer tending crops in field',
   },
 ];
